@@ -1,0 +1,28 @@
+#!/bin/bash
+echo "PodemosAprender CS50 en repl.it"
+
+if ! [ -d ~/LIBCS50 ]; then
+  echo "Instalando LibCs50 en ~/LIBCS50"
+  rm -Rf ~/libcs50_src
+  git clone https://github.com/cs50/libcs50.git ~/libcs50_src
+  (cd ~/libcs50_src; 
+  make; 
+  DESTDIR=~/LIBCS50 make install)
+else
+  echo "LibCs50 en ~/LIBCS50"
+fi
+
+if ! [ -f .env ]; then
+  cat <<EOT > .env
+export LD_LIBRARY_PATH=~/LIBCS50/lib:$LD_LIBRARY_PATH
+export PS1="PodemosAprender\[\e[33m\] \[\e[0m\]\n"
+EOT
+fi
+
+source .env
+make
+echo "************************************************"
+echo "Empieza tu programa, la salida tambien en x.log"
+echo "************************************************"
+./main 2>&1 | tee x.log
+
