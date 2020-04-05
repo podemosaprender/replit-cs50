@@ -12,14 +12,14 @@ else
   echo "LibCs50 en ~/LIBCS50"
 fi
 
-if ! [ -f .env ]; then
-  cat <<EOT > .env
+if ! [ -f .cfg ]; then
+  cat <<EOT > .cfg
 export LD_LIBRARY_PATH=~/LIBCS50/lib:$LD_LIBRARY_PATH
 export PS1="PodemosAprender\[\e[33m\] \[\e[0m\]\n"
 EOT
 fi
 
-source .env
+source .cfg
 make
 echo "************************************************"
 echo "Empieza tu programa, la salida tambien en x.log"
